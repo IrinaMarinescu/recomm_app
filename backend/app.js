@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 // Import routes
 const authRoutes = require('./routes/auth');
+const qrCodeRoutes = require('./routes/qrCode');
 const auth = require('./middleware/auth');
 
 // Middleware
@@ -29,6 +30,7 @@ db.once('open', () => {
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/qrcode', qrCodeRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

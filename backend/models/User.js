@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const { v4: uuidv4 } = require('uuid');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -22,6 +23,19 @@ const userSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  qrCodeId: {
+    type: String,
+    unique: true,
+    default: () => uuidv4()
+  },
+  qrCodeData: {
+    type: String,
+    default: null
+  },
+  qrCodeGeneratedAt: {
+    type: Date,
+    default: null
   }
 });
 

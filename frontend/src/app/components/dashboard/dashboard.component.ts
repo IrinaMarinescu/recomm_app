@@ -5,7 +5,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { AuthService, User } from '../../services/auth.service';
+import { QRCodeComponent } from '../qr-code/qr-code.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +17,9 @@ import { AuthService, User } from '../../services/auth.service';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
+    QRCodeComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
