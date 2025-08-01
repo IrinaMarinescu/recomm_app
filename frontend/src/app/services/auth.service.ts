@@ -30,7 +30,7 @@ export interface RegisterRequest {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:5000/api';
+  private readonly API_URL = 'http://localhost:3000/api';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
@@ -42,11 +42,14 @@ export class AuthService {
   }
 
   private loadUserFromStorage(): void {
-    const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-    
-    if (token && user) {
-      this.currentUserSubject.next(JSON.parse(user));
+    // Check if we're in a browser environment
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const token = localStorage.getItem('token');
+      const user = localStorage.getItem('user');
+      
+      if (token && user) {
+        this.currentUserSubject.next(JSON.parse(user));
+      }
     }
   }
 
@@ -65,8 +68,10 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+    }
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
@@ -76,7 +81,10 @@ export class AuthService {
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
 
   isAuthenticated(): boolean {
@@ -88,8 +96,10 @@ export class AuthService {
   }
 
   private handleAuthResponse(response: AuthResponse): void {
-    localStorage.setItem('token', response.token);
-    localStorage.setItem('user', JSON.stringify(response.user));
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('user', JSON.stringify(response.user));
+    }
     this.currentUserSubject.next(response.user);
   }
 } 
