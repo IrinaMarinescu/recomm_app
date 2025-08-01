@@ -8,54 +8,70 @@
   </div>
 
   <div class="dashboard-content">
-    <mat-card class="user-card">
-      <mat-card-header>
-        <mat-card-title>User Profile</mat-card-title>
-        <mat-card-subtitle>Your account information</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="user-info">
-          <div class="info-row">
-            <strong>Name:</strong>
-            <span>{{ currentUser?.name }}</span>
-          </div>
-          <div class="info-row">
-            <strong>Email:</strong>
-            <span>{{ currentUser?.email }}</span>
-          </div>
-          <div class="info-row">
-            <strong>Member Since:</strong>
-            <span>{{ currentUser?.createdAt | date:'mediumDate' }}</span>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
+    <mat-tab-group>
+      <mat-tab label="Profile">
+        <div class="tab-content">
+          <mat-card class="user-card">
+            <mat-card-header>
+              <mat-card-title>User Profile</mat-card-title>
+              <mat-card-subtitle>Your account information</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="user-info">
+                <div class="info-row">
+                  <strong>Name:</strong>
+                  <span>{{ currentUser?.name }}</span>
+                </div>
+                <div class="info-row">
+                  <strong>Email:</strong>
+                  <span>{{ currentUser?.email }}</span>
+                </div>
+                <div class="info-row">
+                  <strong>Member Since:</strong>
+                  <span>{{ currentUser?.createdAt | date:'mediumDate' }}</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
 
-    <mat-card class="features-card">
-      <mat-card-header>
-        <mat-card-title>Available Features</mat-card-title>
-        <mat-card-subtitle>What you can do with your account</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="features-list">
-          <div class="feature-item">
-            <mat-icon>person</mat-icon>
-            <span>Manage your profile</span>
-          </div>
-          <div class="feature-item">
-            <mat-icon>favorite</mat-icon>
-            <span>Save your preferences</span>
-          </div>
-          <div class="feature-item">
-            <mat-icon>history</mat-icon>
-            <span>View your activity</span>
-          </div>
-          <div class="feature-item">
-            <mat-icon>settings</mat-icon>
-            <span>Account settings</span>
-          </div>
+          <mat-card class="features-card">
+            <mat-card-header>
+              <mat-card-title>Available Features</mat-card-title>
+              <mat-card-subtitle>What you can do with your account</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="features-list">
+                <div class="feature-item">
+                  <mat-icon>qr_code</mat-icon>
+                  <span>Personal QR Code</span>
+                </div>
+                <div class="feature-item">
+                  <mat-icon>person</mat-icon>
+                  <span>Manage your profile</span>
+                </div>
+                <div class="feature-item">
+                  <mat-icon>favorite</mat-icon>
+                  <span>Save your preferences</span>
+                </div>
+                <div class="feature-item">
+                  <mat-icon>history</mat-icon>
+                  <span>View your activity</span>
+                </div>
+                <div class="feature-item">
+                  <mat-icon>settings</mat-icon>
+                  <span>Account settings</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
         </div>
-      </mat-card-content>
-    </mat-card>
+      </mat-tab>
+      
+      <mat-tab label="QR Code">
+        <div class="tab-content">
+          <app-qr-code></app-qr-code>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div> 

@@ -1,0 +1,79 @@
+<div class="qr-code-container">
+  <mat-card class="qr-code-card">
+    <mat-card-header>
+      <mat-card-title>Your Personal QR Code</mat-card-title>
+      <mat-card-subtitle>Share this QR code with others to connect</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="qr-code-content">
+        <div *ngIf="loading" class="loading-container">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading your QR code...</p>
+        </div>
+
+        <div *ngIf="!loading && qrCodeImage" class="qr-code-display">
+          <div class="qr-code-image-container">
+            <img [src]="qrCodeImage" alt="Personal QR Code" class="qr-code-image">
+          </div>
+          
+          <div class="qr-code-info">
+            <div class="info-item">
+              <strong>QR Code ID:</strong>
+              <span class="qr-code-id">{{ qrCodeId }}</span>
+              <button mat-icon-button (click)="copyQRCodeId()" matTooltip="Copy QR Code ID">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+            
+            <div class="info-item" *ngIf="generatedAt">
+              <strong>Generated:</strong>
+              <span>{{ getFormattedDate(generatedAt) }}</span>
+            </div>
+          </div>
+
+          <div class="qr-code-actions">
+            <button 
+              mat-raised-button 
+              color="primary" 
+              (click)="generateNewQRCode()"
+              [disabled]="generating">
+              <mat-icon>refresh</mat-icon>
+              <span *ngIf="!generating">Generate New</span>
+              <span *ngIf="generating">Generating...</span>
+            </button>
+            
+            <button 
+              mat-raised-button 
+              color="accent" 
+              (click)="downloadQRCode()">
+              <mat-icon>download</mat-icon>
+              Download
+            </button>
+            
+            <button 
+              mat-raised-button 
+              (click)="shareQRCode()">
+              <mat-icon>share</mat-icon>
+              Share
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="!loading && !qrCodeImage" class="no-qr-code">
+          <mat-icon class="no-qr-icon">qr_code</mat-icon>
+          <p>No QR code generated yet</p>
+          <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="generateNewQRCode()"
+            [disabled]="generating">
+            <mat-icon>add</mat-icon>
+            <span *ngIf="!generating">Generate QR Code</span>
+            <span *ngIf="generating">Generating...</span>
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 
