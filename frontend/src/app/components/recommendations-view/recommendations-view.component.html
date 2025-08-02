@@ -1,0 +1,81 @@
+<div class="recommendations-container">
+  <div class="recommendations-wrapper">
+    <mat-card class="recommendations-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon class="header-icon">recommend</mat-icon>
+          Recommendations
+        </mat-card-title>
+        <mat-card-subtitle *ngIf="userInfo">
+          for {{ userInfo.name }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div *ngIf="loading" class="loading-container">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading recommendations...</p>
+        </div>
+
+        <div *ngIf="!loading && userInfo" class="recommendations-content">
+          <div class="user-info">
+            <mat-chip-set>
+              <mat-chip color="primary" selected>
+                <mat-icon>person</mat-icon>
+                {{ userInfo.name }}
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+
+          <div class="recommendations-list">
+            <div *ngIf="recommendations.length === 0" class="no-recommendations">
+              <mat-icon class="no-rec-icon">sentiment_dissatisfied</mat-icon>
+              <h3>No recommendations yet</h3>
+              <p>Share your QR code to start receiving recommendations!</p>
+              <button mat-raised-button color="primary" (click)="copyRecommendationUrl()">
+                <mat-icon>share</mat-icon>
+                Copy Recommendation URL
+              </button>
+            </div>
+
+            <div *ngFor="let recommendation of recommendations" class="recommendation-item">
+              <div class="recommendation-header">
+                <h3 class="recommendation-name">{{ recommendation.name }}</h3>
+                <span class="recommendation-date">{{ getFormattedDate(recommendation.submittedAt) }}</span>
+              </div>
+              
+              <div class="recommendation-content">
+                <p *ngIf="recommendation.description" class="recommendation-description">
+                  {{ recommendation.description }}
+                </p>
+                
+                <div class="recommendation-actions">
+                  <button mat-raised-button color="primary" (click)="openLink(recommendation.link)">
+                    <mat-icon>open_in_new</mat-icon>
+                    Visit Link
+                  </button>
+                  <button mat-button (click)="openLink(recommendation.link)">
+                    <mat-icon>content_copy</mat-icon>
+                    Copy Link
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="share-section">
+            <button mat-raised-button color="accent" (click)="copyRecommendationUrl()">
+              <mat-icon>share</mat-icon>
+              Share Your QR Code
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="!loading && !userInfo" class="error-container">
+          <mat-icon class="error-icon">error</mat-icon>
+          <p>User not found or invalid QR code.</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div> 

@@ -34,6 +34,27 @@ A full-stack recommendation application with user authentication and signup func
 - MongoDB (local installation or MongoDB Atlas)
 - npm or yarn package manager
 
+### Quick Start
+1. **Start the backend server:**
+   ```bash
+   ./start-backend.sh
+   ```
+   Or manually:
+   ```bash
+   cd backend
+   # Create .env file with:
+   # JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+   # MONGO_URI=mongodb://localhost:27017/recomm_app
+   # PORT=5000
+   npm start
+   ```
+
+2. **Start the frontend:**
+   ```bash
+   cd frontend
+   npm start
+   ```
+
 ### Backend Setup
 
 1. Navigate to the backend directory:

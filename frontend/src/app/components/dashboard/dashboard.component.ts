@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthService, User } from '../../services/auth.service';
 import { QRCodeComponent } from '../qr-code/qr-code.component';
+import { QRCodeService } from '../../services/qr-code.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,17 +27,42 @@ import { QRCodeComponent } from '../qr-code/qr-code.component';
 })
 export class DashboardComponent implements OnInit {
   currentUser: User | null = null;
+  qrCodeId: string = '';
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private qrCodeService: QRCodeService
   ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.getCurrentUser();
     if (!this.currentUser) {
       this.router.navigate(['/login']);
+    } else {
+      this.loadQRCodeId();
+    }
+  }
+
+  loadQRCodeId(): void {
+    this.qrCodeService.getQRCodeData().subscribe({
+      next: (response) => {
+        if (response.success && response.qrCodeId) {
+          this.qrCodeId = response.qrCodeId;
+        }
+      },
+      error: (error) => {
+        console.error('Error loading QR code ID:', error);
+      }
+    });
+  }
+
+  viewRecommendations(): void {
+    if (this.qrCodeId) {
+      this.router.navigate(['/recommendations', this.qrCodeId]);
+    } else {
+      this.snackBar.open('QR Code not available', 'Close', { duration: 3000 });
     }
   }
 

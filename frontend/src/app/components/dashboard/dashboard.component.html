@@ -72,6 +72,26 @@
           <app-qr-code></app-qr-code>
         </div>
       </mat-tab>
+      
+      <mat-tab label="Recommendations">
+        <div class="tab-content">
+          <mat-card class="recommendations-card">
+            <mat-card-header>
+              <mat-card-title>Your Recommendations</mat-card-title>
+              <mat-card-subtitle>View all recommendations shared with you</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="recommendations-info">
+                <p>View all the recommendations that people have shared with you using your QR code.</p>
+                <button mat-raised-button color="primary" (click)="viewRecommendations()">
+                  <mat-icon>visibility</mat-icon>
+                  View Recommendations
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div> 

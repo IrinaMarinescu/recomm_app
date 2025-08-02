@@ -1,8 +1,8 @@
 <div class="qr-code-container">
   <mat-card class="qr-code-card">
     <mat-card-header>
-      <mat-card-title>Your Personal QR Code</mat-card-title>
-      <mat-card-subtitle>Share this QR code with others to connect</mat-card-subtitle>
+      <mat-card-title>Your Recommendation QR Code</mat-card-title>
+      <mat-card-subtitle>Share this QR code with others to receive recommendations</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
@@ -10,6 +10,14 @@
         <div *ngIf="loading" class="loading-container">
           <mat-spinner diameter="40"></mat-spinner>
           <p>Loading your QR code...</p>
+          <button 
+            mat-raised-button 
+            color="accent" 
+            (click)="loadQRCode()"
+            style="margin-top: 10px;">
+            <mat-icon>refresh</mat-icon>
+            Retry Loading
+          </button>
         </div>
 
         <div *ngIf="!loading && qrCodeImage" class="qr-code-display">
@@ -23,6 +31,14 @@
               <span class="qr-code-id">{{ qrCodeId }}</span>
               <button mat-icon-button (click)="copyQRCodeId()" matTooltip="Copy QR Code ID">
                 <mat-icon>content_copy</mat-icon>
+              </button>
+            </div>
+            
+            <div class="info-item">
+              <strong>Recommendation URL:</strong>
+              <span class="recommendation-url">{{ qrCodeService.generateRecommendationUrl(qrCodeId) }}</span>
+              <button mat-icon-button (click)="copyRecommendationUrl()" matTooltip="Copy Recommendation URL">
+                <mat-icon>link</mat-icon>
               </button>
             </div>
             
@@ -71,6 +87,22 @@
             <mat-icon>add</mat-icon>
             <span *ngIf="!generating">Generate QR Code</span>
             <span *ngIf="generating">Generating...</span>
+          </button>
+          <button 
+            mat-raised-button 
+            color="accent" 
+            (click)="loadQRCode()"
+            style="margin-top: 10px;">
+            <mat-icon>refresh</mat-icon>
+            Retry Loading
+          </button>
+          <button 
+            mat-raised-button 
+            color="warn" 
+            (click)="goToLogin()"
+            style="margin-top: 10px;">
+            <mat-icon>login</mat-icon>
+            Login Required
           </button>
         </div>
       </div>

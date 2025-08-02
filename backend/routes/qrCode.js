@@ -97,8 +97,8 @@ router.post('/decode', async (req, res) => {
   }
 });
 
-// Get user profile by QR code ID (public endpoint)
-router.get('/profile/:qrCodeId', async (req, res) => {
+// Get user info by QR code ID for recommendation form (public endpoint)
+router.get('/user/:qrCodeId', async (req, res) => {
   try {
     const { qrCodeId } = req.params;
     
@@ -117,14 +117,14 @@ router.get('/profile/:qrCodeId', async (req, res) => {
       user: {
         name: user.name,
         email: user.email,
-        createdAt: user.createdAt
+        qrCodeId: user.qrCodeId
       }
     });
   } catch (error) {
-    console.error('QR code profile retrieval error:', error);
+    console.error('QR code user retrieval error:', error);
     res.status(500).json({ 
       success: false, 
-      message: 'Failed to retrieve user profile' 
+      message: 'Failed to retrieve user info' 
     });
   }
 });

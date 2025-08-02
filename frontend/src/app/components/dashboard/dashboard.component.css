@@ -122,6 +122,46 @@
   font-weight: 500;
 }
 
+.recommendations-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.recommendations-card mat-card-header {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+  color: white;
+  padding: 20px;
+}
+
+.recommendations-card mat-card-title {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.recommendations-card mat-card-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.recommendations-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.recommendations-info p {
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.recommendations-info button {
+  min-width: 200px;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
 @media (max-width: 768px) {
   .dashboard-header {
     flex-direction: column;

@@ -14,7 +14,7 @@ class QRCodeService {
       name: user.name,
       email: user.email,
       timestamp: new Date().toISOString(),
-      type: 'user_profile'
+      type: 'recommendation_form'
     };
     
     return JSON.stringify(qrData);
@@ -120,7 +120,7 @@ class QRCodeService {
   static validateQRCodeData(qrData) {
     try {
       const decoded = this.decodeQRCodeData(qrData);
-      return decoded && decoded.userId && decoded.qrCodeId && decoded.type === 'user_profile';
+      return decoded && decoded.userId && decoded.qrCodeId && decoded.type === 'recommendation_form';
     } catch (error) {
       return false;
     }

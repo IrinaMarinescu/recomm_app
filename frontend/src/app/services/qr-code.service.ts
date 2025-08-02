@@ -30,7 +30,7 @@ export interface UserProfile {
   providedIn: 'root'
 })
 export class QRCodeService {
-  private readonly API_URL = 'http://localhost:3000/api/qrcode';
+  private readonly API_URL = 'http://localhost:5000/api/qrcode';
 
   constructor(private http: HttpClient) {}
 
@@ -66,12 +66,20 @@ export class QRCodeService {
   }
 
   /**
-   * Get user profile by QR code ID
+   * Get user info by QR code ID for recommendation form
    */
-  getUserProfileByQRCode(qrCodeId: string): Observable<{ success: boolean; user?: UserProfile; message?: string }> {
+  getUserInfoByQRCode(qrCodeId: string): Observable<{ success: boolean; user?: UserProfile; message?: string }> {
     return this.http.get<{ success: boolean; user?: UserProfile; message?: string }>(
-      `${this.API_URL}/profile/${qrCodeId}`
+      `${this.API_URL}/user/${qrCodeId}`
     );
+  }
+
+  /**
+   * Generate recommendation form URL for a QR code
+   */
+  generateRecommendationUrl(qrCodeId: string): string {
+    const baseUrl = window.location.origin;
+    return `${baseUrl}/recommend/${qrCodeId}`;
   }
 
   /**
