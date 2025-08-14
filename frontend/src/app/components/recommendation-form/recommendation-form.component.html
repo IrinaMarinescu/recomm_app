@@ -1,44 +1,81 @@
 <div class="recommendation-form-container">
+  <div class="floating-recommendations">
+    <span class="rec-element">💝</span>
+    <span class="rec-element">🎁</span>
+    <span class="rec-element">💖</span>
+    <span class="rec-element">🎁</span>
+    <span class="rec-element">💝</span>
+  </div>
+
   <div class="form-wrapper">
-    <mat-card class="form-card">
+    <mat-card class="form-card cute-card">
       <mat-card-header>
-        <mat-card-title>
-          <mat-icon class="header-icon">recommend</mat-icon>
+        <mat-card-title class="card-title">
+          <span class="card-emoji">💝</span>
           Share a Recommendation
         </mat-card-title>
-        <mat-card-subtitle *ngIf="userInfo">
+        <mat-card-subtitle class="card-subtitle" *ngIf="userInfo">
+          <span class="sparkle-emoji">✨</span>
           for {{ userInfo.name }}
+          <span class="sparkle-emoji">✨</span>
         </mat-card-subtitle>
       </mat-card-header>
 
       <mat-card-content>
         <div *ngIf="loading" class="loading-container">
           <mat-spinner diameter="40"></mat-spinner>
-          <p>Loading...</p>
+          <p class="loading-text">
+            <span class="loading-emoji">⏳</span>
+            Loading...
+            <span class="loading-emoji">⏳</span>
+          </p>
         </div>
 
         <form *ngIf="!loading && userInfo" [formGroup]="recommendationForm" (ngSubmit)="onSubmit()" class="recommendation-form">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Name of Recommendation</mat-label>
+          <mat-form-field appearance="outline" class="full-width cute-form-field">
+            <mat-label>
+              <span class="field-icon">👤</span>
+              Your Name
+            </mat-label>
+            <input matInput formControlName="recommenderName" placeholder="Enter your name">
+            <mat-error *ngIf="recommendationForm.get('recommenderName')?.invalid && recommendationForm.get('recommenderName')?.touched">
+              <span class="error-emoji">😅</span>
+              {{ getErrorMessage('recommenderName') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width cute-form-field">
+            <mat-label>
+              <span class="field-icon">🎯</span>
+              Name of Recommendation
+            </mat-label>
             <input matInput formControlName="name" placeholder="e.g., Amazing Coffee Shop">
             <mat-error *ngIf="recommendationForm.get('name')?.invalid && recommendationForm.get('name')?.touched">
+              <span class="error-emoji">😅</span>
               {{ getErrorMessage('name') }}
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Link to Recommendation</mat-label>
+          <mat-form-field appearance="outline" class="full-width cute-form-field">
+            <mat-label>
+              <span class="field-icon">🔗</span>
+              Link to Recommendation
+            </mat-label>
             <input matInput formControlName="link" placeholder="https://example.com">
             <mat-error *ngIf="recommendationForm.get('link')?.invalid && recommendationForm.get('link')?.touched">
+              <span class="error-emoji">😅</span>
               {{ getErrorMessage('link') }}
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Description (Optional)</mat-label>
+          <mat-form-field appearance="outline" class="full-width cute-form-field">
+            <mat-label>
+              <span class="field-icon">💭</span>
+              Reasoning (Optional)
+            </mat-label>
             <textarea matInput formControlName="description" 
                       placeholder="Why should they check this out? What makes it special?"
-                      rows="3"></textarea>
+                      rows="4"></textarea>
           </mat-form-field>
 
           <div class="form-actions">
@@ -46,17 +83,27 @@
                     color="primary" 
                     type="submit" 
                     [disabled]="submitting || recommendationForm.invalid"
-                    class="submit-button">
+                    class="submit-button cute-button">
               <mat-spinner *ngIf="submitting" diameter="20" class="button-spinner"></mat-spinner>
-              <span *ngIf="!submitting">Submit Recommendation</span>
-              <span *ngIf="submitting">Submitting...</span>
+              <span *ngIf="!submitting" class="button-content">
+                <span class="button-emoji">💝</span>
+                Submit Recommendation
+              </span>
+              <span *ngIf="submitting" class="button-content loading-dots">
+                <span class="button-emoji">⏳</span>
+                Submitting
+              </span>
             </button>
           </div>
         </form>
 
         <div *ngIf="!loading && !userInfo" class="error-container">
-          <mat-icon class="error-icon">error</mat-icon>
-          <p>Invalid QR code or user not found.</p>
+          <mat-icon class="error-icon cute-icon">error</mat-icon>
+          <p class="error-text">
+            <span class="error-emoji">😔</span>
+            Invalid QR code or user not found.
+            <span class="error-emoji">😔</span>
+          </p>
         </div>
       </mat-card-content>
     </mat-card>

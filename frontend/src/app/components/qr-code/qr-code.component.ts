@@ -206,6 +206,13 @@ export class QRCodeComponent implements OnInit {
     }
   }
 
+  getRecommendationUrl(): string {
+    if (this.qrCodeId) {
+      return this.qrCodeService.generateRecommendationUrl(this.qrCodeId);
+    }
+    return '';
+  }
+
   getFormattedDate(dateString: string): string {
     return new Date(dateString).toLocaleString();
   }

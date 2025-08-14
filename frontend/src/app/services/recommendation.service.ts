@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface RecommendationFormData {
+  recommenderName: string;
   name: string;
   link: string;
   description?: string;
@@ -31,7 +32,7 @@ export interface UserInfoResponse {
   providedIn: 'root'
 })
 export class RecommendationService {
-  private apiUrl = environment.apiUrl || 'http://localhost:5000/api';
+  private apiUrl = environment.apiUrl || 'http://localhost:5001/api';
 
   constructor(private http: HttpClient) {}
 

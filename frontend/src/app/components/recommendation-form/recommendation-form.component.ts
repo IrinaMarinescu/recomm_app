@@ -43,6 +43,7 @@ export class RecommendationFormComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.recommendationForm = this.fb.group({
+      recommenderName: ['', [Validators.required, Validators.minLength(2)]],
       name: ['', [Validators.required, Validators.minLength(2)]],
       link: ['', [Validators.required, Validators.pattern('https?://.+')]],
       description: ['']
@@ -118,10 +119,10 @@ export class RecommendationFormComponent implements OnInit {
   getErrorMessage(fieldName: string): string {
     const field = this.recommendationForm.get(fieldName);
     if (field?.hasError('required')) {
-      return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+      return `${fieldName === 'recommenderName' ? 'Your name' : fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
     }
     if (field?.hasError('minlength')) {
-      return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be at least ${field.errors?.['minlength'].requiredLength} characters`;
+      return `${fieldName === 'recommenderName' ? 'Your name' : fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} must be at least ${field.errors?.['minlength'].requiredLength} characters`;
     }
     if (field?.hasError('pattern')) {
       return 'Please enter a valid URL (starting with http:// or https://)';

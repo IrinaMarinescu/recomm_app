@@ -57,11 +57,16 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.valid) {
-      this.loading = true;
+      // Use setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
+      setTimeout(() => {
+        this.loading = true;
+      });
+      
       const { confirmPassword, ...userData } = this.registerForm.value;
       
       this.authService.register(userData).subscribe({
         next: () => {
+          this.loading = false;
           this.router.navigate(['/dashboard']);
           this.snackBar.open('Registration successful!', 'Close', { duration: 3000 });
         },

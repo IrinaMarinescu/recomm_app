@@ -1,65 +1,112 @@
 <div class="dashboard-container">
-  <div class="dashboard-header">
-    <h1>Welcome to Your Dashboard</h1>
-    <button mat-raised-button color="warn" (click)="logout()">
-      <mat-icon>logout</mat-icon>
-      Logout
+  <div class="floating-bubbles">
+    <span class="bubble">🫧</span>
+    <span class="bubble">💫</span>
+    <span class="bubble">✨</span>
+    <span class="bubble">🫧</span>
+    <span class="bubble">💫</span>
+  </div>
+
+  <div class="dashboard-header cute-card">
+    <div class="header-content">
+      <h1 class="cute-title">
+        <span class="title-emoji">🎉</span>
+        Welcome to Your Dashboard
+        <span class="title-emoji">🎉</span>
+      </h1>
+      <p class="header-subtitle">
+        <span class="sparkle-emoji">✨</span>
+        Your magical space awaits!
+        <span class="sparkle-emoji">✨</span>
+      </p>
+    </div>
+    <button mat-raised-button color="warn" class="logout-button cute-button" (click)="logout()">
+      <mat-icon class="cute-icon">logout</mat-icon>
+      <span class="button-text">Logout</span>
     </button>
   </div>
 
   <div class="dashboard-content">
-    <mat-tab-group>
-      <mat-tab label="Profile">
+    <mat-tab-group class="cute-tabs">
+      <mat-tab label="👤 Profile">
         <div class="tab-content">
-          <mat-card class="user-card">
+          <mat-card class="user-card cute-card">
             <mat-card-header>
-              <mat-card-title>User Profile</mat-card-title>
-              <mat-card-subtitle>Your account information</mat-card-subtitle>
+              <mat-card-title class="card-title">
+                <span class="card-emoji">👤</span>
+                User Profile
+              </mat-card-title>
+              <mat-card-subtitle class="card-subtitle">
+                <span class="sparkle-emoji">✨</span>
+                Your account information
+                <span class="sparkle-emoji">✨</span>
+              </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               <div class="user-info">
                 <div class="info-row">
-                  <strong>Name:</strong>
-                  <span>{{ currentUser?.name }}</span>
+                  <strong class="info-label">
+                    <span class="info-emoji">📝</span>
+                    Name:
+                  </strong>
+                  <span class="info-value">{{ currentUser?.name }}</span>
                 </div>
                 <div class="info-row">
-                  <strong>Email:</strong>
-                  <span>{{ currentUser?.email }}</span>
+                  <strong class="info-label">
+                    <span class="info-emoji">📧</span>
+                    Email:
+                  </strong>
+                  <span class="info-value">{{ currentUser?.email }}</span>
                 </div>
                 <div class="info-row">
-                  <strong>Member Since:</strong>
-                  <span>{{ currentUser?.createdAt | date:'mediumDate' }}</span>
+                  <strong class="info-label">
+                    <span class="info-emoji">📅</span>
+                    Member Since:
+                  </strong>
+                  <span class="info-value">{{ currentUser?.createdAt | date:'mediumDate' }}</span>
                 </div>
               </div>
             </mat-card-content>
           </mat-card>
 
-          <mat-card class="features-card">
+          <mat-card class="features-card cute-card">
             <mat-card-header>
-              <mat-card-title>Available Features</mat-card-title>
-              <mat-card-subtitle>What you can do with your account</mat-card-subtitle>
+              <mat-card-title class="card-title">
+                <span class="card-emoji">🎯</span>
+                Available Features
+              </mat-card-title>
+              <mat-card-subtitle class="card-subtitle">
+                <span class="sparkle-emoji">✨</span>
+                What you can do with your account
+                <span class="sparkle-emoji">✨</span>
+              </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               <div class="features-list">
                 <div class="feature-item">
-                  <mat-icon>qr_code</mat-icon>
-                  <span>Personal QR Code</span>
+                  <mat-icon class="cute-icon">qr_code</mat-icon>
+                  <span class="feature-text">Personal QR Code</span>
+                  <span class="feature-emoji">📱</span>
                 </div>
                 <div class="feature-item">
-                  <mat-icon>person</mat-icon>
-                  <span>Manage your profile</span>
+                  <mat-icon class="cute-icon">person</mat-icon>
+                  <span class="feature-text">Manage your profile</span>
+                  <span class="feature-emoji">👤</span>
                 </div>
                 <div class="feature-item">
-                  <mat-icon>favorite</mat-icon>
-                  <span>Save your preferences</span>
+                  <mat-icon class="cute-icon">favorite</mat-icon>
+                  <span class="feature-text">Save your preferences</span>
+                  <span class="feature-emoji">💖</span>
                 </div>
                 <div class="feature-item">
-                  <mat-icon>history</mat-icon>
-                  <span>View your activity</span>
+                  <mat-icon class="cute-icon">history</mat-icon>
+                  <span class="feature-text">View your activity</span>
+                  <span class="feature-emoji">📊</span>
                 </div>
                 <div class="feature-item">
-                  <mat-icon>settings</mat-icon>
-                  <span>Account settings</span>
+                  <mat-icon class="cute-icon">settings</mat-icon>
+                  <span class="feature-text">Account settings</span>
+                  <span class="feature-emoji">⚙️</span>
                 </div>
               </div>
             </mat-card-content>
@@ -67,25 +114,36 @@
         </div>
       </mat-tab>
       
-      <mat-tab label="QR Code">
+      <mat-tab label="📱 QR Code">
         <div class="tab-content">
           <app-qr-code></app-qr-code>
         </div>
       </mat-tab>
       
-      <mat-tab label="Recommendations">
+      <mat-tab label="💝 Recommendations">
         <div class="tab-content">
-          <mat-card class="recommendations-card">
+          <mat-card class="recommendations-card cute-card">
             <mat-card-header>
-              <mat-card-title>Your Recommendations</mat-card-title>
-              <mat-card-subtitle>View all recommendations shared with you</mat-card-subtitle>
+              <mat-card-title class="card-title">
+                <span class="card-emoji">💝</span>
+                Your Recommendations
+              </mat-card-title>
+              <mat-card-subtitle class="card-subtitle">
+                <span class="sparkle-emoji">✨</span>
+                View all recommendations shared with you
+                <span class="sparkle-emoji">✨</span>
+              </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               <div class="recommendations-info">
-                <p>View all the recommendations that people have shared with you using your QR code.</p>
-                <button mat-raised-button color="primary" (click)="viewRecommendations()">
-                  <mat-icon>visibility</mat-icon>
-                  View Recommendations
+                <p class="info-text">
+                  <span class="text-emoji">🎁</span>
+                  View all the recommendations that people have shared with you using your QR code.
+                  <span class="text-emoji">🎁</span>
+                </p>
+                <button mat-raised-button color="primary" class="view-button cute-button" (click)="viewRecommendations()">
+                  <mat-icon class="cute-icon">visibility</mat-icon>
+                  <span class="button-text">View Recommendations</span>
                 </button>
               </div>
             </mat-card-content>

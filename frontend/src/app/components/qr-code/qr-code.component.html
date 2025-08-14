@@ -1,50 +1,81 @@
 <div class="qr-code-container">
-  <mat-card class="qr-code-card">
+  <div class="floating-qr-elements">
+    <span class="qr-element">📱</span>
+    <span class="qr-element">🔗</span>
+    <span class="qr-element">📲</span>
+    <span class="qr-element">🔗</span>
+    <span class="qr-element">📱</span>
+  </div>
+
+  <mat-card class="qr-code-card cute-card">
     <mat-card-header>
-      <mat-card-title>Your Recommendation QR Code</mat-card-title>
-      <mat-card-subtitle>Share this QR code with others to receive recommendations</mat-card-subtitle>
+      <mat-card-title class="card-title">
+        <span class="card-emoji">📱</span>
+        Your Recommendation QR Code
+      </mat-card-title>
+      <mat-card-subtitle class="card-subtitle">
+        <span class="sparkle-emoji">✨</span>
+        Share this QR code with others to receive recommendations
+        <span class="sparkle-emoji">✨</span>
+      </mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
       <div class="qr-code-content">
         <div *ngIf="loading" class="loading-container">
           <mat-spinner diameter="40"></mat-spinner>
-          <p>Loading your QR code...</p>
+          <p class="loading-text">
+            <span class="loading-emoji">⏳</span>
+            Loading your QR code...
+            <span class="loading-emoji">⏳</span>
+          </p>
           <button 
             mat-raised-button 
             color="accent" 
-            (click)="loadQRCode()"
-            style="margin-top: 10px;">
-            <mat-icon>refresh</mat-icon>
-            Retry Loading
+            class="retry-button cute-button"
+            (click)="loadQRCode()">
+            <mat-icon class="cute-icon">refresh</mat-icon>
+            <span class="button-text">Retry Loading</span>
           </button>
         </div>
 
         <div *ngIf="!loading && qrCodeImage" class="qr-code-display">
           <div class="qr-code-image-container">
             <img [src]="qrCodeImage" alt="Personal QR Code" class="qr-code-image">
+            <div class="qr-code-overlay">
+              <span class="overlay-emoji">📱</span>
+            </div>
           </div>
           
           <div class="qr-code-info">
             <div class="info-item">
-              <strong>QR Code ID:</strong>
+              <strong class="info-label">
+                <span class="info-emoji">🆔</span>
+                QR Code ID:
+              </strong>
               <span class="qr-code-id">{{ qrCodeId }}</span>
-              <button mat-icon-button (click)="copyQRCodeId()" matTooltip="Copy QR Code ID">
+              <button mat-icon-button class="copy-button cute-icon" (click)="copyQRCodeId()" matTooltip="Copy QR Code ID">
                 <mat-icon>content_copy</mat-icon>
               </button>
             </div>
             
             <div class="info-item">
-              <strong>Recommendation URL:</strong>
-              <span class="recommendation-url">{{ qrCodeService.generateRecommendationUrl(qrCodeId) }}</span>
-              <button mat-icon-button (click)="copyRecommendationUrl()" matTooltip="Copy Recommendation URL">
+              <strong class="info-label">
+                <span class="info-emoji">🔗</span>
+                Recommendation URL:
+              </strong>
+              <span class="recommendation-url">{{ getRecommendationUrl() }}</span>
+              <button mat-icon-button class="copy-button cute-icon" (click)="copyRecommendationUrl()" matTooltip="Copy Recommendation URL">
                 <mat-icon>link</mat-icon>
               </button>
             </div>
             
             <div class="info-item" *ngIf="generatedAt">
-              <strong>Generated:</strong>
-              <span>{{ getFormattedDate(generatedAt) }}</span>
+              <strong class="info-label">
+                <span class="info-emoji">📅</span>
+                Generated:
+              </strong>
+              <span class="generated-date">{{ getFormattedDate(generatedAt) }}</span>
             </div>
           </div>
 
@@ -52,57 +83,65 @@
             <button 
               mat-raised-button 
               color="primary" 
+              class="action-button cute-button"
               (click)="generateNewQRCode()"
               [disabled]="generating">
-              <mat-icon>refresh</mat-icon>
-              <span *ngIf="!generating">Generate New</span>
-              <span *ngIf="generating">Generating...</span>
+              <mat-icon class="cute-icon">refresh</mat-icon>
+              <span class="button-text" *ngIf="!generating">Generate New</span>
+              <span class="button-text loading-dots" *ngIf="generating">Generating</span>
             </button>
             
             <button 
               mat-raised-button 
               color="accent" 
+              class="action-button cute-button"
               (click)="downloadQRCode()">
-              <mat-icon>download</mat-icon>
-              Download
+              <mat-icon class="cute-icon">download</mat-icon>
+              <span class="button-text">Download</span>
             </button>
             
             <button 
               mat-raised-button 
+              class="action-button cute-button"
               (click)="shareQRCode()">
-              <mat-icon>share</mat-icon>
-              Share
+              <mat-icon class="cute-icon">share</mat-icon>
+              <span class="button-text">Share</span>
             </button>
           </div>
         </div>
 
         <div *ngIf="!loading && !qrCodeImage" class="no-qr-code">
-          <mat-icon class="no-qr-icon">qr_code</mat-icon>
-          <p>No QR code generated yet</p>
+          <mat-icon class="no-qr-icon cute-icon">qr_code</mat-icon>
+          <p class="no-qr-text">
+            <span class="text-emoji">📱</span>
+            No QR code generated yet
+            <span class="text-emoji">📱</span>
+          </p>
           <button 
             mat-raised-button 
             color="primary" 
+            class="generate-button cute-button"
             (click)="generateNewQRCode()"
             [disabled]="generating">
-            <mat-icon>add</mat-icon>
-            <span *ngIf="!generating">Generate QR Code</span>
-            <span *ngIf="generating">Generating...</span>
+            <mat-icon class="cute-icon">add</mat-icon>
+            <span class="button-text" *ngIf="!generating">Generate QR Code</span>
+            <span class="button-text loading-dots" *ngIf="generating">Generating</span>
           </button>
           <button 
             mat-raised-button 
             color="accent" 
-            (click)="loadQRCode()"
-            style="margin-top: 10px;">
-            <mat-icon>refresh</mat-icon>
-            Retry Loading
+            class="retry-button cute-button"
+            (click)="loadQRCode()">
+            <mat-icon class="cute-icon">refresh</mat-icon>
+            <span class="button-text">Retry Loading</span>
           </button>
           <button 
             mat-raised-button 
             color="warn" 
-            (click)="goToLogin()"
-            style="margin-top: 10px;">
-            <mat-icon>login</mat-icon>
-            Login Required
+            class="login-button cute-button"
+            (click)="goToLogin()">
+            <mat-icon class="cute-icon">login</mat-icon>
+            <span class="button-text">Login Required</span>
           </button>
         </div>
       </div>

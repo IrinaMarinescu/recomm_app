@@ -30,7 +30,7 @@ export interface UserProfile {
   providedIn: 'root'
 })
 export class QRCodeService {
-  private readonly API_URL = 'http://localhost:5000/api/qrcode';
+  private readonly API_URL = 'http://localhost:5001/api/qrcode';
 
   constructor(private http: HttpClient) {}
 

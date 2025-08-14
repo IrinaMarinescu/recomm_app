@@ -43,9 +43,14 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      this.loading = true;
+      // Use setTimeout to avoid ExpressionChangedAfterItHasBeenCheckedError
+      setTimeout(() => {
+        this.loading = true;
+      });
+      
       this.authService.login(this.loginForm.value).subscribe({
         next: () => {
+          this.loading = false;
           this.router.navigate(['/dashboard']);
           this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
         },

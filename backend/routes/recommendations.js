@@ -7,6 +7,7 @@ const router = express.Router();
 
 // Submit a new recommendation
 router.post('/submit', [
+  body('recommenderName').trim().notEmpty().withMessage('Recommender name is required'),
   body('name').trim().notEmpty().withMessage('Name is required'),
   body('link').trim().isURL().withMessage('Valid URL is required'),
   body('description').optional().trim(),
@@ -23,7 +24,7 @@ router.post('/submit', [
       });
     }
 
-    const { name, link, description, qrCodeId } = req.body;
+    const { recommenderName, name, link, description, qrCodeId } = req.body;
 
     // Find the user by QR code ID
     const user = await User.findOne({ qrCodeId });
@@ -36,6 +37,7 @@ router.post('/submit', [
 
     // Create the recommendation
     const recommendation = new Recommendation({
+      recommenderName,
       name,
       link,
       description: description || '',
@@ -50,6 +52,7 @@ router.post('/submit', [
       message: 'Recommendation submitted successfully',
       recommendation: {
         id: recommendation._id,
+        recommenderName: recommendation.recommenderName,
         name: recommendation.name,
         link: recommendation.link,
         description: recommendation.description,
